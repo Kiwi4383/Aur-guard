@@ -1,0 +1,7 @@
+[Unit]
+Description=aur-guard check periodico (refresca feeds, registra cambios y avisa)
+Wants=aur-guard-check.timer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/aur-guard check

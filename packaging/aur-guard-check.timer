@@ -1,0 +1,10 @@
+[Unit]
+Description=Ejecuta aur-guard check cada hora
+
+[Timer]
+OnBootSec=10min
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
