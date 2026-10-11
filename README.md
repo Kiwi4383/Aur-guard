@@ -46,17 +46,11 @@ cd aur-guard
 cd /tmp/aur-guard-pkg && makepkg -si
 ```
 
-O directamente con cargo:
+O directamente con cargo (necesitas `rust`, `cargo`, `openssl` y `pkg-config`):
 
 ```bash
 cargo build --release
 sudo install -Dm755 target/release/aur-guard /usr/bin/aur-guard
-```
-
-Con Nix (sin instalar Rust en el sistema):
-
-```bash
-nix-shell -p rustc cargo pkg-config openssl --run "cargo build --release"
 ```
 
 ### Inicio rápido
@@ -140,7 +134,7 @@ aur-guard stop
 ### Desarrollo
 
 ```bash
-nix-shell -p rustc cargo clippy pkg-config openssl --run "cargo build"
+cargo build
 cargo clippy --all-targets   # cero warnings
 cargo test                   # 41 tests
 ```
@@ -191,17 +185,11 @@ cd aur-guard
 cd /tmp/aur-guard-pkg && makepkg -si
 ```
 
-Or directly with cargo:
+Or directly with cargo (you need `rust`, `cargo`, `openssl`, and `pkg-config`):
 
 ```bash
 cargo build --release
 sudo install -Dm755 target/release/aur-guard /usr/bin/aur-guard
-```
-
-With Nix (no system-wide Rust needed):
-
-```bash
-nix-shell -p rustc cargo pkg-config openssl --run "cargo build --release"
 ```
 
 ### Quickstart
@@ -285,7 +273,7 @@ aur-guard stop
 ### Development
 
 ```bash
-nix-shell -p rustc cargo clippy pkg-config openssl --run "cargo build"
+cargo build
 cargo clippy --all-targets   # zero warnings
 cargo test                   # 41 tests
 ```
