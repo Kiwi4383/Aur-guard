@@ -25,6 +25,14 @@ cargo test
 ```
 All three must pass.
 
+On systems without a Rust toolchain (e.g. NixOS), run them via nix-shell.
+`cargo`/`clippy` need `pkg-config` + `openssl` (reqwest native-tls):
+```sh
+nix-shell -p rustc cargo clippy pkg-config openssl --run "cargo build"
+nix-shell -p rustc cargo clippy pkg-config openssl --run "cargo clippy --all-targets"
+nix-shell -p rustc cargo clippy pkg-config openssl --run "cargo test"
+```
+
 ## Tests
 - Unit tests live as `#[cfg(test)] mod tests` inside each src file.
 - Add tests for every new pure function (and any refactored pure logic).
