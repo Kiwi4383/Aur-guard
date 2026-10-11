@@ -37,7 +37,16 @@ Monitor de malware para el AUR + auditoría del host, escrito en Rust.
 
 ### Instalación
 
-Desde el repo (recomendado, incluye unidades systemd):
+La forma más simple:
+
+```bash
+git clone https://github.com/Kiwi4383/Aur-guard aur-guard
+cd aur-guard
+./install.sh              # interactivo
+./install.sh --yes        # instala todo sin preguntar
+```
+
+O empaquetado desde el repo (incluye unidades systemd):
 
 ```bash
 git clone https://github.com/Kiwi4383/Aur-guard aur-guard
@@ -176,7 +185,16 @@ Los tests viven junto al código (`mod tests` en cada módulo) y cada helper pur
 
 ### Installation
 
-From the repo (recommended, includes systemd units):
+The easiest way:
+
+```bash
+git clone https://github.com/Kiwi4383/Aur-guard aur-guard
+cd aur-guard
+./install.sh              # interactive
+./install.sh --yes        # installs everything without asking
+```
+
+Or packaged from the repo (includes systemd units):
 
 ```bash
 git clone https://github.com/Kiwi4383/Aur-guard aur-guard
