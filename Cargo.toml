@@ -3,7 +3,7 @@ name = "aur-guard"
 version = "0.1.0"
 edition = "2021"
 description = "Monitor de malware AUR + auditoria de host (daemon efimero + gancho paru)"
-license = "GPL-3.0-or-later"
+license = "0BSD"
 
 [dependencies]
 anyhow = "1"

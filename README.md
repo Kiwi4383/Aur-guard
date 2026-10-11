@@ -90,4 +90,4 @@ log_stderr = true       # escribir alertas en stderr (el log a fichero siempre s
 
 ## Licencia
 
-GPL-3.0-or-later. Ver [LICENSE](LICENSE).
+0BSD (BSD Zero Clause License). Ver [LICENSE](LICENSE).

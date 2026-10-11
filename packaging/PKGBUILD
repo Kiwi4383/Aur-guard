@@ -8,7 +8,7 @@ pkgrel=1
 pkgdesc="Monitor de malware AUR + auditoria de host (daemon efimero + gancho paru)"
 arch=('x86_64')
 url="https://github.com/pansususu/Aur-Guard"
-license=('GPL-3.0-or-later')
+license=('0BSD')
 depends=('paru')
 optdepends=('libnotify: alertas desktop con notify-send'
             'iproute2: deteccion de puertos escuchando (ss)'
