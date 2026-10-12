@@ -37,6 +37,15 @@ ask() {
   [[ "$ans" =~ ^([Nn]|[Nn][Oo])$ ]] && return 1 || return 0
 }
 
+# Root no necesita sudo; sin systemd corriendo, systemctl solo avisa.
+SUDO="sudo"
+if [[ "$(id -u)" -eq 0 ]]; then
+  SUDO=""
+fi
+systemd_reload() {
+  systemctl --user daemon-reload 2>/dev/null || echo "aviso: sin systemd --user (normal en contenedores); salteando daemon-reload."
+}
+
 need() {
   command -v "$1" >/dev/null 2>&1 || {
     echo "falta '$1'. Instalalo con: sudo pacman -S $2" >&2
@@ -55,11 +64,11 @@ command -v paru >/dev/null 2>&1 || echo "aviso: 'paru' no encontrado; el gancho 
 echo "==> compilando (release)"
 cargo build --release --locked
 
-echo "==> instalando binario y unidades systemd (pide sudo)"
-sudo install -Dm755 target/release/aur-guard /usr/bin/aur-guard
-sudo install -Dm644 packaging/aur-guard-check.service /usr/lib/systemd/user/aur-guard-check.service
-sudo install -Dm644 packaging/aur-guard-check.timer /usr/lib/systemd/user/aur-guard-check.timer
-systemctl --user daemon-reload
+echo "==> instalando binario y unidades systemd (pide sudo salvo como root)"
+$SUDO install -Dm755 target/release/aur-guard /usr/bin/aur-guard
+$SUDO install -Dm644 packaging/aur-guard-check.service /usr/lib/systemd/user/aur-guard-check.service
+$SUDO install -Dm644 packaging/aur-guard-check.timer /usr/lib/systemd/user/aur-guard-check.timer
+systemd_reload
 
 echo "==> instalando gancho de paru"
 aur-guard install
@@ -72,7 +81,7 @@ fi
 
 if [[ "$TIMER" -eq 1 ]]; then
   if ask "activar el chequeo automatico cada hora (systemd --user)?"; then
-    systemctl --user enable --now aur-guard-check.timer
+    systemctl --user enable --now aur-guard-check.timer || echo "aviso: no se pudo activar el timer (sin systemd corriendo)."
   fi
 fi
 
